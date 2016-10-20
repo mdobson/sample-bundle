@@ -1,0 +1,29 @@
+configFormatVersion: 1.0.0 
+system:
+  max_connections: 1000
+  max_connections_hard: 5000
+  restart_sleep: 500
+  restart_max: 50
+  max_times: 300
+  vhosts:
+    myvhost:
+      vhost: www.myhost.com:9000
+      cert: /path/to/cert
+scopes:
+  org/env:
+    proxies:
+      hello:
+        basepath: /base
+        target: http://mocktarget.apigee.net/
+        vhost: myvhost
+        plugins:
+          - oauth
+headers:
+  x-forwarded-for: true
+  x-forwarded-host: true
+  x-request-id: true
+  x-response-time: true
+  via: true
+oauth:
+  allowNoAuthorization: false
+  allowInvalidAuthorization: false
